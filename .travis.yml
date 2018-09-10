@@ -9,6 +9,9 @@ install:
 
 before_install:
   - docker pull faforever/faf-db
+
+before_script:
+  - sudo /etc/init.d/mysql stop
   - docker run -d -p 3306:3306 faforever/faf-db
 
 script:
