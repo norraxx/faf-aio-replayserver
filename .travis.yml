@@ -15,7 +15,7 @@ before_script:
   - docker run -d -p 127.0.0.1:3306:3306 faforever/faf-db
 
 script:
-  - ./test.sh
+  - MYSQL_HOST=faf-db ./test.sh
 
 after_success:
   # - export REPO=faforever/faf-aio-replayserver
