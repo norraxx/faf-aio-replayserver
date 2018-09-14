@@ -12,10 +12,12 @@ before_install:
 
 before_script:
   - sudo /etc/init.d/mysql stop
-  - docker run -d -p 127.0.0.1:3306:3306 faforever/faf-db
+  - docker run -d --name faf-db -p 127.0.0.1:3306:3306 faforever/faf-db
+  - sleep 30
+  - docker logs faf-db
 
 script:
-  - MYSQL_HOST=faf-db ./test.sh
+  - MYSQL_HOST=127.0.0.1 ./test.sh
 
 after_success:
   # - export REPO=faforever/faf-aio-replayserver
