@@ -22,6 +22,9 @@ before_script:
 script:
   - MYSQL_HOST=127.0.0.1 ./test.sh
 
+after_script:
+  - docker logs faf-db
+
 after_success:
   # - export REPO=faforever/faf-aio-replayserver
   # - if [ -n "${TRAVIS_TAG}" ]; then
