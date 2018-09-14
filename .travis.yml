@@ -15,12 +15,12 @@ before_script:
 #  - export FAF_AIO_REPLAYSERVER_USER=root
 #  - export MYSQL_AIO_REPLAYSERVER_PASSWORD=banana
   - sudo /etc/init.d/mysql stop
-  - docker run -d --name faf-db -p 127.0.0.1:3306:3306 -e MYSQL_ROOT_PASSWORD=root faforever/faf-db
+  - docker run -d --name faf-db -p 127.0.0.1:3306:3306 -e MYSQL_ROOT_PASSWORD=banana faforever/faf-db
   - sleep 60
   - docker logs faf-db
 
 script:
-  - MYSQL_HOST=127.0.0.1 ./test.sh
+  - MYSQL_HOST=127.0.0.1 MYSQL_USER=root MYSQL_PASSWORD=banana ./test.sh
 
 after_script:
   - docker logs faf-db
