@@ -11,11 +11,11 @@ before_install:
   - docker pull faforever/faf-db
 
 before_script:
-  - export MYSQL_ROOT_PASSWORD=banana
-  - export FAF_AIO_REPLAYSERVER_USER=root
-  - export MYSQL_AIO_REPLAYSERVER_PASSWORD=banana
+#  - export MYSQL_ROOT_PASSWORD=banana
+#  - export FAF_AIO_REPLAYSERVER_USER=root
+#  - export MYSQL_AIO_REPLAYSERVER_PASSWORD=banana
   - sudo /etc/init.d/mysql stop
-  - docker run -d --name faf-db -p 127.0.0.1:3306:3306 faforever/faf-db
+  - docker run -d --name faf-db -p 127.0.0.1:3306:3306 -e MYSQL_ROOT_PASSWORD=root faforever/faf-db
   - sleep 30
   - docker logs faf-db
 
