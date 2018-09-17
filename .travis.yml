@@ -14,9 +14,9 @@ before_install:
 
 install:
   - git clone https://github.com/FAForever/faf-stack.git faf-stack
-      && git checkout develop
       && cp -r config.template config
   - "pip3 install -r requirements.txt"
+  - git branch
 
 before_script:
   - docker-compose -f faf-stack/docker-compose.yml up -d faf-db
