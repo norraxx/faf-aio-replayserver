@@ -14,8 +14,10 @@ before_install:
 
 install:
   - git clone https://github.com/FAForever/faf-stack.git faf-stack
-      && cp -r ./faf-stack/config.template ./faf-stack/config
-  - "pip3 install -r requirements.txt"
+      && pushd faf-stack
+      && cp -r config.template config
+      && popd
+  - pip3 install -r requirements.txt
   - git branch
 
 before_script:
