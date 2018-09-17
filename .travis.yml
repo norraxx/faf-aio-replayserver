@@ -24,9 +24,10 @@ before_script:
   - docker-compose -f faf-stack/docker-compose.yml up -d faf-db
 
 script:
-  - MYSQL_USER=root MYSQL_PASSWORD=banana ./test.sh
+  - MYSQL_HOST=faf-db MYSQL_USER=root MYSQL_PASSWORD=banana ./test.sh
 
 after_script:
+  - docker logs faf-db
   - docker-compose -f faf-stack/docker-compose.yml down -d faf-db
 
 after_success:
