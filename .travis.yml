@@ -1,31 +1,31 @@
+
 language: python
 python: 3.6
 
 sudo: required
 services: docker
 
+before_install:
+  - sudo /etc/init.d/mysql stop
+  - sudo rm /usr/local/bin/docker-compose
+  - curl -L https://github.com/docker/compose/releases/download/1.16.1/docker-compose-`uname -s`-`uname -m` > /tmp/docker-compose
+  - chmod +x /tmp/docker-compose
+  - sudo mv /tmp/docker-compose /usr/local/bin
+
 install:
+  - git clone https://github.com/FAForever/faf-stack.git faf-stack
+      && git checkout develop
+      && cp -r config.template config
   - "pip3 install -r requirements.txt"
 
-before_install:
-  - docker pull faforever/faf-db
-
 before_script:
-#  - export MYSQL_ROOT_PASSWORD=banana
-#  - export FAF_AIO_REPLAYSERVER_USER=root
-#  - export MYSQL_AIO_REPLAYSERVER_PASSWORD=banana
-  - sudo /etc/init.d/mysql stop
-  - docker run -d --name faf-db -p 3306:3306 -e MYSQL_ROOT_PASSWORD=banana faforever/faf-db
-# should be replaced with wait script
-  - sleep 60
-  - docker exec -it faf-db mysql -uroot -pbanana -e "GRANT ALL PRIVILEGES ON faf.* TO 'root'@'%'; FLUSH PRIVILEGES;"
-  - docker logs faf-db
+  - docker-compose -f faf-stack/docker-compose.yml up -d faf-db
 
 script:
-  - MYSQL_HOST=faf-db MYSQL_USER=root MYSQL_PASSWORD=banana ./test.sh
+  - MYSQL_USER=root MYSQL_PASSWORD=banana ./test.sh
 
 after_script:
-  - docker logs faf-db
+  - docker-compose -f faf-stack/docker-compose.yml down -d faf-db
 
 after_success:
   # - export REPO=faforever/faf-aio-replayserver
