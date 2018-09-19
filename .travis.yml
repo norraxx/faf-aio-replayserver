@@ -30,12 +30,12 @@ script:
 after_script:
   - docker logs faf-db
   - docker-compose -f faf-stack/docker-compose.yml down -d faf-db
+  - coveralls
 
 after_success:
-  # - export REPO=faforever/faf-aio-replayserver
-  # - if [ -n "${TRAVIS_TAG}" ]; then
-  #     docker login -u="${DOCKER_USERNAME}" -p="${DOCKER_PASSWORD}";
-  #     docker tag faf-aio-replayserver ${REPO}:${TRAVIS_TAG};
-  #     docker push ${REPO};
-  #   fi
-  - coveralls
+  - export REPO=faforever/faf-aio-replayserver
+  - if [ -n "${TRAVIS_TAG}" ]; then
+      docker login -u="${DOCKER_USERNAME}" -p="${DOCKER_PASSWORD}";
+      docker tag faf-aio-replayserver ${REPO}:${TRAVIS_TAG};
+      docker push ${REPO};
+    fi
