@@ -128,7 +128,7 @@ def get_replay(paths: List[str]) -> str:
             try:
                 replay = parse(buffer, parse_body=False)
                 body_positions.append(replay['body_offset'])
-            except ValueError as e:
+            except ValueError:
                 logger.exception("Wrong replay structure")
                 continue
 

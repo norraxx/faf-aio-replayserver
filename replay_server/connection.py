@@ -3,7 +3,7 @@ from asyncio import IncompleteReadError, LimitOverrunError
 from builtins import ValueError
 from typing import Optional, Tuple
 
-from replay_server.constants import TERMINATOR, ACTION_TYPES, NEW_LINE
+from replay_server.constants import TERMINATOR, ACTION_TYPES
 from replay_server.logger import logger
 
 __all__ = ('ReplayConnection',)
@@ -25,7 +25,7 @@ class ReplayConnection:
         """
         action = await self.reader.read(1)
         if action in ACTION_TYPES:
-            if await self.reader.read(1) == NEW_LINE:
+            if await self.reader.read(1) == b'/':
                 return ACTION_TYPES.get(action)
 
         return None

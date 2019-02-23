@@ -15,10 +15,10 @@ class ReplayWorkerBase:
         await self.cleanup()
 
     async def process(self):
-        raise NotImplemented("=^_^=")
+        raise NotImplementedError("=^_^=")
 
     async def cleanup(self):
-        raise NotImplemented("=^_^=")
+        raise NotImplementedError("=^_^=")
 
     def get_uid(self):
         return self._connection.uid

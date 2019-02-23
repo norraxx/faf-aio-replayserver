@@ -1,9 +1,10 @@
 import os
+import logging
 
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(os.path.realpath(__file__)), '..', '..'))
 
 # logging
-LOGGING_LEVEL = int(os.environ.get("LOGGING_LEVEL", 20))  # INFO = 20 DEBUG = 10 ERROR = 40
+LOGGING_LEVEL = int(os.environ.get("LOGGING_LEVEL", logging.INFO))  # INFO = 20 DEBUG = 10 ERROR = 40
 ENV = os.environ.get("ENVIRONMENT", "development")  # in production it MUST be "production"
 APP_VERSION = os.environ.get("APP_VERSION", "0.1")  # used for bugsnag logging
 
@@ -26,17 +27,15 @@ TERMINATOR = b'\x00'  # null terminator
 # actions for putting and getting stream
 PUT_ACTION = b'P'
 GET_ACTION = b'G'
-NEW_LINE = b'/'
 
 
-class RequestType:
-    WRITER = 0  # saving stream
-    READER = 1  # serving stream
+REQUEST_TYPE_WRITER = 0  # saving stream
+REQUEST_TYPE_READER = 1  # serving stream
 
 
 ACTION_TYPES = {
-    PUT_ACTION: RequestType.WRITER,
-    GET_ACTION: RequestType.READER,
+    PUT_ACTION: REQUEST_TYPE_WRITER,
+    GET_ACTION: REQUEST_TYPE_READER,
 }
 
 

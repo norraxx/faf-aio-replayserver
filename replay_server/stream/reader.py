@@ -72,7 +72,6 @@ class ReplayReader(ReplayWorkerBase):
                     if not has_writer_online:
                         break
                     logger.debug("<%s> No data get for %s. Waiting", self._connection, self.get_uid())
-                    await asyncio.sleep(WAIT_STEP)
                     continue
 
                 size_to_read = self.get_size_to_read(data, has_writer_online)

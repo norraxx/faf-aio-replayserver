@@ -92,6 +92,13 @@ async def get_replay_info(game_id: int, replay_data: bytes, start_time: int) -> 
         raise
 
 
+def get_teams(players):
+    teams: Dict[int, List[str]] = {}
+    for player in players:
+        teams.setdefault(player['team'], []).append(player['login'])
+    return teams
+
+
 async def get_game_stats(game_id: int):
     """
     Check, if result is saved already in database.

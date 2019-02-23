@@ -2,7 +2,7 @@ from io import FileIO
 from typing import Union
 
 from replay_server.connection import ReplayConnection
-from replay_server.constants import RequestType
+from replay_server.constants import REQUEST_TYPE_READER, REQUEST_TYPE_WRITER
 from replay_server.stream.reader import ReplayReader
 from replay_server.stream.replay_storage import ReplayStorage
 from replay_server.stream.writer import ReplayWriter
@@ -31,14 +31,14 @@ class WorkerFactory:
             "connection": connection
         }
 
-        if type_ == RequestType.READER:
+        if type_ == REQUEST_TYPE_READER:
             replays = ReplayStorage.get_replays(uid)
             if not replays:
                 raise ConnectionError("Can't read a non existing stream!")
             kwargs['buffers'] = [FileIO(filename_, "rb") for filename_ in replays.keys()]
             replay_worker_class = ReplayReader
 
-        elif type_ == RequestType.WRITER:
+        elif type_ == REQUEST_TYPE_WRITER:
             file_path = get_temp_replay_path(uid)
             file_ = FileIO(file_path, "w")
             kwargs['buffer'] = file_
