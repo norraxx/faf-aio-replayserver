@@ -85,7 +85,7 @@ async def db_game_stats(cursor, replay_id, db_user, db_game_featured_mods):
     await cursor.execute("""
         INSERT INTO `game_stats` (`id`, `starttime`, `endtime`, `gametype`, `gamemod`, 
                                   `host`, `mapid`, `gamename`, `validity`)
-        VALUES ({}, now(), now(), '0', 0, 1, 1, "Name of the game", 1)
+        VALUES ({}, now(), now(), '0', 1, 1, 1, "Name of the game", 1)
         ON DUPLICATE KEY UPDATE `id` = `id`
     """.format(replay_id))
 

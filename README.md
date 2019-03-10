@@ -1,5 +1,4 @@
 [![Build Status](https://travis-ci.org/norraxx/faf-aio-replayserver.svg?branch=master)](https://travis-ci.org/norraxx/faf-aio-replayserver)
-[![Coverage Status](https://coveralls.io/repos/github/norraxx/faf-aio-replayserver/badge.svg?branch=master)](https://coveralls.io/github/norraxx/faf-aio-replayserver?branch=master)
 
 # Replay server
 
