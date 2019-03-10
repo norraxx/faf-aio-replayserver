@@ -5,7 +5,7 @@ import aiomysql
 from aiomysql import create_pool, Pool
 
 from replay_server.logger import logger
-from replay_server.constants import MYSQL_DNS
+from replay_server.constants import MYSQL_DSN
 
 
 __all__ = ('db',)
@@ -20,7 +20,7 @@ class DB:
         self.testing_conn = None
 
     async def create_pool(self, loop: asyncio.AbstractEventLoop) -> None:
-        self.connection_pool = await create_pool(loop=loop, **MYSQL_DNS)
+        self.connection_pool = await create_pool(loop=loop, **MYSQL_DSN)
 
     def get_pool(self):
         return self.connection_pool

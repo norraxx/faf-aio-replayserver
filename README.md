@@ -61,8 +61,6 @@ When there is no connections, temporary data are destroyed.
 During saving replay, server communicates with MySQL database.
 
 #### TODO stuff:
-
-    - no slow down after 5 minutes of stream (3000 ticks slowdown)
     - security problems
         - like disapprove replay when lobby is not active/created
         - replay is sending data for too much long time/stream is too big

@@ -43,7 +43,7 @@ ACTION_TYPES = {
 BUG_SNAG_API_KEY = os.environ.get("BUG_SNAG_API_KEY", "3305a486a2f18fdcff9512c5a4e52406")
 
 # mysql
-MYSQL_DNS = {
+MYSQL_DSN = {
     "host": os.environ.get("MYSQL_HOST", "127.0.0.1"),
     "port": int(os.environ.get("MYSQL_PORT", 3306)),
     "user": os.environ.get("MYSQL_USER", "root"),
