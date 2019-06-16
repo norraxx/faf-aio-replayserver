@@ -4,7 +4,7 @@ import pytest
 
 
 @pytest.mark.asyncio
-@pytest.mark.timeout(5)
+@pytest.mark.timeout(60)
 async def test_multiple_connections(client, replay_data, put_replay_command, get_replay_command):
     """
     Concurency behavior, we can read data, while they're streamed.

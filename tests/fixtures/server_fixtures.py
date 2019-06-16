@@ -7,10 +7,9 @@ from replay_server.constants import PORT
 from replay_server.server import ReplayServer
 
 
-__all__ = ('server', 'client')
-
-
 if not int(os.environ.get("LIVE_TEST", 0)):
+    __all__ = ('server', 'client')
+
     @pytest.yield_fixture
     async def server(event_loop, unused_tcp_port, ):
         replay_server = ReplayServer(unused_tcp_port)
@@ -47,6 +46,8 @@ if not int(os.environ.get("LIVE_TEST", 0)):
             writer.close()
 
 else:
+    __all__ = ('client',)
+
     @pytest.yield_fixture
     async def client(event_loop):
         clients = []
